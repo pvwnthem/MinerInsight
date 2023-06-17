@@ -17,9 +17,7 @@ app.use(cors({
 
 // app base routes
 app.get("/", (req: Request, res: Response) => {
-    discoverRunning().then((miners: miner[]) => {
-        res.json(miners)
-    })
+    res.send("MinerInsight server")
     
 })
 
