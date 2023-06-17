@@ -1,11 +1,13 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 import cors from "cors"
 import ejs from "ejs"
+import bodyParser from "body-parser";
 
 import { Logger } from "./logging/Logger";
 import { miner } from "./types/miner.types";
 import { test } from "./services/api.service";
 import path from "path";
+import miners from "./routes/miners";
 
 const port = 8888;
 
@@ -25,8 +27,12 @@ app.use(cors({
     origin: '*'
 }));
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.engine('html', ejs.renderFile);
 
+
+//routes
+app.use("/miners", miners)
 
 // app base routes
 app.get("/", (req: Request, res: Response) => {

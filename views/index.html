@@ -7,10 +7,22 @@
     <script src="index.js"></script>
     <title>MinerInsight Server</title>
 </head>
-
+<style>
+    #modal {
+        border: 0.1rem;
+        border-radius: 12px;
+        padding: 20px;
+    }
+</style>
 <body>
     <button id="open-button">Add Miners</button>
     <dialog id="modal">
+        <form id="addform" method="post" action="/miners/add">
+            <label>Api Link</label>
+            <input type="text" name="link" id="link" placeholder="http://localhost:4000" />
+            <button type="submit">Add</button>
+        </form>
+        
         <button id="close-button">Close</button>
     </dialog>
 </body>
