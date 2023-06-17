@@ -7,6 +7,10 @@ const lolminerAPI: minerapi = {
       location: "/",
       value: "Workers",
     },
+    algorithms: {
+        location: "/",
+        value: "Algorithms",
+    }
   };
 const lolminer = new Miner<minerapi>("lolminer", "http://localhost:4000", lolminerAPI, "lolMiner API");
   

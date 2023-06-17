@@ -1,5 +1,13 @@
 export interface minerapi {
+    [key: string] : {
+        "location": string,
+        "value": string,
+    }
     "workers": {
+        "location": string;
+        "value": string;
+    };
+    "algorithms": {
         "location": string;
         "value": string;
     };
