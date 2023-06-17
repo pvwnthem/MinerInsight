@@ -8,15 +8,26 @@ export function parseLocation ( location : string, data : string )
 {
     const keys = location.split('.');
     let value: any = data;
-
+  
     for (const key of keys) {
-        if (value && typeof value === 'object' && key in value) {
-        value = value[key];
+      if (value) {
+        if (Array.isArray(value) && !isNaN(Number(key))) {
+          const index = Number(key);
+          if (index >= 0 && index < value.length) {
+            value = value[index];
+          } else {
+            return undefined;
+          }
+        } else if (key in value) {
+          value = value[key];
         } else {
-        return undefined;
+          return undefined;
         }
+      } else {
+        return undefined;
+      }
     }
-
+  
     return value;
 }
 
@@ -95,5 +106,6 @@ export async function getAllData ( miner: miner ): Promise<any>
        
     }   
     // return standardized data
+    console.log(standardizeData(data, miner))
     return standardizeData(data, miner)
 }

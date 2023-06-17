@@ -1,7 +1,9 @@
 export interface minerapi {
     [key: string] : minerapiroute;
     "software": minerapiroute;
-    "uptime": minerapiroute
+    "uptime": minerapiroute;
+    "hashrate": minerapiroute;
+    "hashrate_unit": minerapiroute
     //"workers": minerapiroute;
 }
 
