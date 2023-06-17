@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Logger } from "../logging/Logger";
-import { apilocation } from "../types/miner.types";
+import { apilocation, miner } from "../types/miner.types";
 
 
 export function parseLocation ( location : string, data : string )
@@ -21,6 +21,5 @@ export async function getField ( location : apilocation, baseUrl : string ): Pro
     const response: AxiosResponse = await axios.get(baseUrl + location.location)
     const data: any = parseLocation(location.value, response.data)
 
-    return data
-
+    return data;
 }
