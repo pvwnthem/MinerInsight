@@ -1,4 +1,5 @@
 import { Logger } from "../logging/Logger";
+import { apilocation } from "../types/miner.types";
 
 
 export function parseLocation ( location : string, data : string )
@@ -14,4 +15,9 @@ export function parseLocation ( location : string, data : string )
 
     Logger.Dev(fieldValue)
     return fieldValue;
+}
+
+export function getValue ( location : apilocation )
+{
+    
 }
