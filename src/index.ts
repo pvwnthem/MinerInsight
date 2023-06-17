@@ -5,6 +5,7 @@ import ejs from "ejs"
 import { Logger } from "./logging/Logger";
 import { miner } from "./types/miner.types";
 import { test } from "./services/api.service";
+import path from "path";
 
 const port = 8888;
 
@@ -30,8 +31,10 @@ app.engine('html', ejs.renderFile);
 // app base routes
 app.get("/", (req: Request, res: Response) => {
     res.render('index.html')
-    
-    
+})
+
+app.get("/index.js", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname + "/scripts/index.js"))
 })
 
 // run app
