@@ -3,8 +3,8 @@ import cors from "cors"
 import { createProxyMiddleware } from "http-proxy-middleware"
 
 import { Logger } from "./logging/Logger";
-import { discoverRunning } from "./services/discovery.service";
 import { miner } from "./types/miner.types";
+import { test } from "./services/api.service";
 
 const port = 8888;
 
@@ -26,7 +26,10 @@ app.use(cors({
 
 // app base routes
 app.get("/", (req: Request, res: Response) => {
-    res.send("MinerInsight server")
+    test().then((data) => {
+        res.send(data)
+    })
+    
     
 })
 

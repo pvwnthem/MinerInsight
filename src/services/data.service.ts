@@ -5,16 +5,14 @@ import { apilocation } from "../types/miner.types";
 
 export function parseLocation ( location : string, data : string )
 {
-    const parsedData = JSON.parse(data);
 
     const fieldArr = location.split('.');
-    let fieldValue = parsedData;
+    let fieldValue: any = data;
 
     for (const field of fieldArr) {
         fieldValue = fieldValue[field];
     }
 
-    Logger.Dev(fieldValue + "parseLocation")
     return fieldValue;
 }
 
@@ -23,7 +21,6 @@ export async function getField ( location : apilocation, baseUrl : string ): Pro
     const response: AxiosResponse = await axios.get(baseUrl + location.location)
     const data: any = parseLocation(location.value, response.data)
 
-    Logger.Dev(data + "getField")
     return data
 
 }
