@@ -25,7 +25,7 @@ const lolminerAPI: minerapi = {
         value: "Workers"
     } */
   };
-const lolminer = new Miner<minerapi>("lolminer", "http://localhost:4000", lolminerAPI, "lolMiner API");
+const lolminer = new Miner<minerapi>("lolminer", "", lolminerAPI, "lolMiner API");
   
 
 
