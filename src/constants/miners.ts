@@ -1,7 +1,9 @@
+import { miner } from "@/types/miner.types"
 
-export const lolminer = {
+export const lolminer: miner = {
     name: "lolminer",
     baseUrl: "http://localhost:4000",
+    serverHeader: "lolMiner API",
     api: {
         "workers": {
             "location": "/",
@@ -10,6 +12,6 @@ export const lolminer = {
     },
 }
 
-export const miners = [
+export const miners: miner[] = [
     lolminer
 ]

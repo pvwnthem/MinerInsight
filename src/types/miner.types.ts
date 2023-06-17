@@ -13,5 +13,8 @@ export interface apilocation {
 export interface miner {
     name: string
     baseUrl: string;
+    serverHeader?: string;
+    x_powered_by_header?: string;
     api: minerapi;
+    
 };

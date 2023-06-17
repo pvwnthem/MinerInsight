@@ -12,7 +12,7 @@ import miners from "./routes/miners";
 const port = 8888;
 
 const app: Express = express();
-
+app.use(bodyParser.json());
 // app configuration
 function customHeaders( req: Request, res: Response, next: NextFunction ){
   
@@ -27,7 +27,7 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use(bodyParser.urlencoded({extended: true}));
+
 app.engine('html', ejs.renderFile);
 
 

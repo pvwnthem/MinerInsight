@@ -21,35 +21,28 @@ function main() {
 }
 
 function handleFormSubmission(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+  event.preventDefault();
 
-    // Get the form element
-    var form = event.target;
+  var form = event.target;
+  var formData = {
+    link: form.link.value // Assuming you have an input field with the name "link"
+  };
 
-    // Get the form data
-    var formData = new FormData(form);
+  var xhr = new XMLHttpRequest();
+  xhr.open(form.method, form.action, true);
+  xhr.setRequestHeader('Content-Type', 'application/json'); // Set the content type to JSON
 
-    // Create a new XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var response = xhr.responseText;
+      console.log(response);
+    } else {
+      console.error('Request failed. Status: ' + xhr.status);
+    }
+  };
 
-    // Configure the request
-    xhr.open(form.method, form.action, true);
-
-    // Set the callback function when the request completes
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        var response = xhr.responseText;
-        // Handle the response here
-        console.log(response);
-      } else {
-        // Handle the error case
-        console.error('Request failed. Status: ' + xhr.status);
-      }
-    };
-
-    // Send the request
-    xhr.send(formData);
-
+  xhr.send(JSON.stringify(formData)); // Convert the form data to JSON string
 }
+
 
 window.onload = main
