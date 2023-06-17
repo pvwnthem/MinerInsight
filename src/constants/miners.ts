@@ -1,6 +1,7 @@
 
 export const lolminer = {
-    baseUrl: "http://localhost:4001",
+    name: "lolminer",
+    baseUrl: "http://localhost:4000",
     api: {},
 }
 
