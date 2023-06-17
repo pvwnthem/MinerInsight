@@ -1,17 +1,18 @@
-import { miner } from "@/types/miner.types"
+import { Miner } from "../classes/Miner";
+import { miner, minerapi } from "../types/miner.types"
 
-export const lolminer: miner = {
-    name: "lolminer",
-    baseUrl: "http://localhost:4000",
-    serverHeader: "lolMiner API",
-    api: {
-        "workers": {
-            "location": "/",
-            "value": "Workers"
-        }
+
+const lolminerAPI: minerapi = {
+    workers: {
+      location: "/",
+      value: "Workers",
     },
-}
+  };
+  const lolminer = new Miner<minerapi>("lolminer", "http://localhost:4000", lolminerAPI, "lolMiner API");
+  
 
-export const miners: miner[] = [
+
+
+export const miners = [
     lolminer
 ]

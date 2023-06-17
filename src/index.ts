@@ -5,7 +5,6 @@ import bodyParser from "body-parser";
 
 import { Logger } from "./logging/Logger";
 import { miner } from "./types/miner.types";
-import { test } from "./services/api.service";
 import path from "path";
 import miners from "./routes/miners";
 
