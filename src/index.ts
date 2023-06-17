@@ -24,11 +24,12 @@ app.use(cors({
     origin: '*'
 }));
 
+app.engine('html', ejs.renderFile);
+
+
 // app base routes
 app.get("/", (req: Request, res: Response) => {
-    test().then((data) => {
-        res.send(data)
-    })
+    res.render('index.html')
     
     
 })
