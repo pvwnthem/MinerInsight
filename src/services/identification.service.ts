@@ -1,6 +1,5 @@
 import axios from "axios";
 import { miners } from "../constants/miners";
-import { miner } from "@/types/miner.types";
 
 
 export async function identifyApi(url: string) {

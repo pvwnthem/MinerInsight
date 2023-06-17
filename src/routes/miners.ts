@@ -5,11 +5,9 @@ import express, { Request, Response, Router } from "express"
 const router: Router = express.Router()
 
 router.post('/add', (req: Request, res: Response) => {
-    console.log(req.body)
-    identifyApi(req.body.link).then((res) => {
-        Logger.Dev(res);
+    identifyApi(req.body.link).then((data) => {
+        res.json(data).status(200)
     })
-    res.status(200)
 })
 
 export default router;
