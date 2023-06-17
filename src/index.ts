@@ -1,6 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 import cors from "cors"
-import { createProxyMiddleware } from "http-proxy-middleware"
+import ejs from "ejs"
 
 import { Logger } from "./logging/Logger";
 import { miner } from "./types/miner.types";
