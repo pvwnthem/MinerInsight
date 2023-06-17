@@ -2,7 +2,7 @@
 
 export class Logger {
 
-    public static INFO ( message : string ) 
+    public static Info ( message : string ) 
     {
         console.log("[+] INFO - " + message)
     }

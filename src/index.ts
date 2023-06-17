@@ -11,5 +11,5 @@ const app = express();
 // run app
 
 app.listen(port, () => {
-    Logger.INFO("MinerInsight running on port: " + port)
+    Logger.Info("MinerInsight running on port: " + port)
 })
