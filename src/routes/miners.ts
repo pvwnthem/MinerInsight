@@ -9,7 +9,7 @@ router.post('/add', (req: Request, res: Response) => {
     
     identifyApi(req.body.link).then(async (data) => {
         if (data != "Unknown mining software") {
-            res.json(getAllData(data)).status(200)
+            res.json(await getAllData(data)).status(200)
         }
     })
 })

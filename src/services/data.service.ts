@@ -28,11 +28,11 @@ export async function getFields ( locations: string[], url : string ): Promise<a
 {   
     const response: AxiosResponse = await axios.get(url)
 
-    let data = {};
+    let data: any = {};
 
     for (const location of locations) {
         const parsed: any = parseLocation(location, response.data)
-        console.log(parsed, "parsed")
+        data[location] = parsed
     }
     
 
@@ -63,16 +63,19 @@ export function groupRoutesByLocation( miner : miner ) {
 
 export async function getAllData ( miner: miner ): Promise<any>
 {
+    let data: any = {}
+
     if (miner.baseUrl) {
         const routes = groupRoutesByLocation(miner)
         console.log(routes)
         
         for (const route of Object.keys(routes)) {
-            console.log(route, routes[route], miner.baseUrl + route);
-            await getFields(routes[route], miner.baseUrl+ route);
-          }
+            const response = await getFields(routes[route], miner.baseUrl + route);
+            data = response
+        }
 
        
     }
     
+    return data
 }
