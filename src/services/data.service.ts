@@ -1,19 +1,23 @@
 import axios, { AxiosResponse } from "axios";
 import { Logger } from "../logging/Logger";
 import { apilocation, miner, minerapi } from "../types/miner.types";
+import { standardizedData } from "@/types/data.types";
 
 
 export function parseLocation ( location : string, data : string )
 {
+    const keys = location.split('.');
+    let value: any = data;
 
-    const fieldArr = location.split('.');
-    let fieldValue: any = data;
-
-    for (const field of fieldArr) {
-        fieldValue = fieldValue[field];
+    for (const key of keys) {
+        if (value && typeof value === 'object' && key in value) {
+        value = value[key];
+        } else {
+        return undefined;
+        }
     }
 
-    return fieldValue;
+    return value;
 }
 
 export async function getField ( location : apilocation, baseUrl : string ): Promise<any>
@@ -39,7 +43,22 @@ export async function getFields ( locations: string[], url : string ): Promise<a
     return data;
 }
 
-export function groupRoutesByLocation( miner : miner ) {
+export function standardizeData( data : any, miner : miner ) : standardizedData
+{
+    const rtdata: standardizedData = {};
+
+    for (const prop in miner.api) {
+        if (miner.api.hasOwnProperty(prop)) {
+        const propName = prop as keyof standardizedData;
+        rtdata[propName] = data[miner.api[prop].value];
+        }
+    }
+
+    return rtdata;
+}
+
+export function groupRoutesByLocation( miner : miner ) 
+{
     
     const api: minerapi = miner.api
 
@@ -67,7 +86,6 @@ export async function getAllData ( miner: miner ): Promise<any>
 
     if (miner.baseUrl) {
         const routes = groupRoutesByLocation(miner)
-        console.log(routes)
         
         for (const route of Object.keys(routes)) {
             const response = await getFields(routes[route], miner.baseUrl + route);
@@ -75,7 +93,7 @@ export async function getAllData ( miner: miner ): Promise<any>
         }
 
        
-    }
-    
-    return data
+    }   
+    // return standardized data
+    return standardizeData(data, miner)
 }

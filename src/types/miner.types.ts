@@ -1,16 +1,13 @@
 export interface minerapi {
-    [key: string] : {
-        "location": string,
-        "value": string,
-    }
-    "workers": {
-        "location": string;
-        "value": string;
-    };
-    "algorithms": {
-        "location": string;
-        "value": string;
-    };
+    [key: string] : minerapiroute;
+    "software": minerapiroute;
+    "uptime": minerapiroute
+    //"workers": minerapiroute;
+}
+
+export interface minerapiroute {
+    location: string;
+    value: string;
 }
 
 export interface apilocation {

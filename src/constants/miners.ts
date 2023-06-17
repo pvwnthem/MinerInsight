@@ -3,14 +3,14 @@ import { miner, minerapi } from "../types/miner.types"
 
 
 const lolminerAPI: minerapi = {
-    workers: {
-      location: "/",
-      value: "Workers",
-    },
-    algorithms: {
+    software: {
         location: "/",
-        value: "Algorithms",
-    }
+        value: "Software"
+    },
+    uptime: {
+      location: "/",
+      value: "Session.Uptime",
+    },
   };
 const lolminer = new Miner<minerapi>("lolminer", "http://localhost:4000", lolminerAPI, "lolMiner API");
   
