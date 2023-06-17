@@ -6,4 +6,9 @@ export class Logger {
     {
         console.log("[+] INFO - " + message)
     }
+
+    public static Dev ( message : string ) 
+    {
+        console.log("[+] DEV - " + message)
+    }
 }

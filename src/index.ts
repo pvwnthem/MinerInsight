@@ -5,6 +5,7 @@ import { createProxyMiddleware } from "http-proxy-middleware"
 import { Logger } from "./logging/Logger";
 import { discoverRunning } from "./services/discovery.service";
 import { miner } from "./types/miner.types";
+
 const port = 8888;
 
 const app: Express = express();
