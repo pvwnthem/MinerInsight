@@ -7,6 +7,9 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "dev": "npx ts-node src/index.ts"
+    "dev": "npx ts-node src/index.ts",
+    "build": "npx tsc",
+    "start": "npx tsc && node dist/index.js",
+    "start-nobuild": "node dist/index.js"
   }
 }
