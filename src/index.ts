@@ -10,8 +10,8 @@ const app: Express = express();
 app.get("/", (req: Request, res: Response) => {
     res.send("MinerInsight server")
 })
-// run app
 
+// run app
 app.listen(port, () => {
     Logger.Info("MinerInsight running on port: " + port)
 })
