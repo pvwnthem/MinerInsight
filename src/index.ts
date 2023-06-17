@@ -8,7 +8,7 @@ const app: Express = express();
 
 // app base routes
 app.get("/", (req: Request, res: Response) => {
-
+    res.send("MinerInsight server")
 })
 // run app
 
