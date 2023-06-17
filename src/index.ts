@@ -1,8 +1,8 @@
-import express from "express";
+import express, {type Express} from "express";
 import { Logger } from "./logging/Logger";
 const port = 8888;
 
-const app = express();
+const app: Express = express();
 
 // app configuration
 
