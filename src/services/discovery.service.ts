@@ -1,5 +1,5 @@
-import { miners } from "@/constants/miners";
-import { type miner } from "@/types/miner.types";
+import { miners } from "../constants/miners";
+import { type miner } from "../types/miner.types";
 import axios from 'axios'
 
 export const discoverRunning = async (): Promise<miner[]> => 
