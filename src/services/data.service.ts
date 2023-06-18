@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Logger } from "../logging/Logger";
 import { miner, minerapi, minerapiroute } from "../types/miner.types";
-import { MinerAlgorithm, standardizedData } from "@/types/data.types";
+import { MinerAlgorithm, MinerWorker, standardizedData } from "@/types/data.types";
 
 
 export function parseLocation ( location : string, data : string )
@@ -91,7 +91,35 @@ export function standardizeAlgorithm( data: standardizedData, miner: miner ) {
     
         rtdata.algorithms = algorithmFields;
       }
-      return rtdata
+      return rtdata.algorithms
+}
+
+export function standardizeWorkers( data: standardizedData, miner: miner ) {
+  const rtdata: standardizedData = {};
+
+  if (miner.api.workers) {
+      const workerData = data.workers;
+      const workerFields: MinerWorker[] = [];
+  
+      if (Array.isArray(workerData)) {
+        workerData.forEach((workerObj: any) => {
+          const worker: MinerWorker = {};
+  
+          for (const key in miner.api.workers.locations) {
+            if (miner.api.workers.locations.hasOwnProperty(key)) {
+              const prop = key as keyof MinerWorker;
+              const location = miner.api.workers.locations[key];
+              worker[prop] = parseLocation(location, workerObj);
+            }
+          }
+  
+          workerFields.push(worker);
+        });
+      }
+  
+      rtdata.workers = workerFields;
+    }
+    return rtdata.workers
 }
 
 export function groupRoutesByLocation(miner: miner) {
@@ -129,7 +157,18 @@ export function groupRoutesByLocation(miner: miner) {
     }
     
     const standardizedData: standardizedData = standardizeData(data, miner)
+
+    
+    const standardizedWorkers = standardizeWorkers(standardizedData, miner);
+    const standardizedAlgorithms = standardizeAlgorithm(standardizedData, miner);
+
+    const rtdata = {
+      ...standardizedData,
+      workers: standardizedWorkers,
+      algorithms: standardizedAlgorithms,
+    };
+    
     // Return standardized data
-    return standardizeAlgorithm(standardizedData, miner);
+    return rtdata;
   }
   

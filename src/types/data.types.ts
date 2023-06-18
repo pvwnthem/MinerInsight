@@ -27,6 +27,7 @@ export interface standardizedData {
   export interface WorkerAlgorithmLocations {
     [key: string]: string;
     id: string
+    name: string
   }
   
   export interface MinerWorker {

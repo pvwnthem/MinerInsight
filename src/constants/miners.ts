@@ -16,7 +16,8 @@ const lolminerAPI: minerapi = {
         location: "/",
         value: "Workers",
         locations: {
-            id: "Index"
+            id: "Index",
+            name: "Name"
         }
     },
     algorithms: {
