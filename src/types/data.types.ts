@@ -24,6 +24,10 @@ export interface standardizedData {
     hashrate: string;
     hashrate_unit: string;
   }
+  export interface WorkerAlgorithmLocations {
+    [key: string]: string;
+    id: string
+  }
   
   export interface MinerWorker {
     id?: number

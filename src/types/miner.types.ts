@@ -1,11 +1,11 @@
-import { MinerAlgorithm, MinerAlgorithmLocations, MinerWorker } from "./data.types";
+import { MinerAlgorithm, MinerAlgorithmLocations, MinerWorker, WorkerAlgorithmLocations } from "./data.types";
 
 export interface minerapi {
-    [key: string]: minerapiroute | algorithmapiroute;
+    [key: string]: minerapiroute | algorithmapiroute | workerapiroute;
     software: minerapiroute;
     uptime: minerapiroute;
     algorithms: algorithmapiroute;
-    workers: minerapiroute;
+    workers: workerapiroute;
   }
   
 
@@ -17,6 +17,10 @@ export interface minerapiroute {
 
 export interface algorithmapiroute extends minerapiroute {
     locations: MinerAlgorithmLocations
+}
+
+export interface workerapiroute extends minerapiroute {
+  locations: WorkerAlgorithmLocations
 }
 
 export interface miner {
