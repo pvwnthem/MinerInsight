@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Logger } from "../logging/Logger";
-import { apilocation, miner, minerapi } from "../types/miner.types";
-import { standardizedData } from "@/types/data.types";
+import { miner, minerapi, minerapiroute } from "../types/miner.types";
+import { MinerAlgorithm, standardizedData } from "@/types/data.types";
 
 
 export function parseLocation ( location : string, data : string )
@@ -31,7 +31,7 @@ export function parseLocation ( location : string, data : string )
     return value;
 }
 
-export async function getField ( location : apilocation, baseUrl : string ): Promise<any>
+export async function getField ( location : minerapiroute, baseUrl : string ): Promise<any>
 {
     const response: AxiosResponse = await axios.get(baseUrl + location.location)
     const data: any = parseLocation(location.value, response.data)
@@ -57,7 +57,6 @@ export async function getFields ( locations: string[], url : string ): Promise<a
 export function standardizeData( data : any, miner : miner ) : standardizedData
 {
     const rtdata: standardizedData = {};
-
     for (const prop in miner.api) {
         if (miner.api.hasOwnProperty(prop)) {
         const propName = prop as keyof standardizedData;
@@ -68,11 +67,37 @@ export function standardizeData( data : any, miner : miner ) : standardizedData
     return rtdata;
 }
 
-export function groupRoutesByLocation( miner : miner ) 
-{
-    
-    const api: minerapi = miner.api
+export function standardizeAlgorithm( data: standardizedData, miner: miner ) {
+    const rtdata: standardizedData = {};
 
+    if (miner.api.algorithms) {
+        const algorithmsData = data.algorithms;
+        const algorithmFields: MinerAlgorithm[] = [];
+    
+        if (Array.isArray(algorithmsData)) {
+          algorithmsData.forEach((algorithmObj: any) => {
+            const algorithm: MinerAlgorithm = {};
+    
+            for (const key in miner.api.algorithms.locations) {
+              if (miner.api.algorithms.locations.hasOwnProperty(key)) {
+                const prop = key as keyof MinerAlgorithm;
+                const location = miner.api.algorithms.locations[key];
+                algorithm[prop] = parseLocation(location, algorithmObj);
+              }
+            }
+    
+            algorithmFields.push(algorithm);
+          });
+        }
+    
+        rtdata.algorithms = algorithmFields;
+      }
+      return rtdata
+}
+
+export function groupRoutesByLocation(miner: miner) {
+    const api: minerapi = miner.api;
+  
     const routesByLocation: any = {};
   
     for (const key in api) {
@@ -90,22 +115,22 @@ export function groupRoutesByLocation( miner : miner )
     return routesByLocation;
   }
   
+  
 
-export async function getAllData ( miner: miner ): Promise<any>
-{
-    let data: any = {}
-
+  export async function getAllData(miner: miner): Promise<any> {
+    let data: any = {};
+  
     if (miner.baseUrl) {
-        const routes = groupRoutesByLocation(miner)
-        
-        for (const route of Object.keys(routes)) {
-            const response = await getFields(routes[route], miner.baseUrl + route);
-            data = response
-        }
-
-       
-    }   
-    // return standardized data
-    console.log(standardizeData(data, miner))
-    return standardizeData(data, miner)
-}
+      const routes = groupRoutesByLocation(miner);
+        console.log(routes)
+      for (const route of Object.keys(routes)) {
+        const response = await getFields(routes[route], miner.baseUrl + route);
+        data = response;
+      }
+    }
+    
+    const standardizedData: standardizedData = standardizeData(data, miner)
+    // Return standardized data
+    return standardizeAlgorithm(standardizedData, miner);
+  }
+  

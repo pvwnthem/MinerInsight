@@ -12,18 +12,29 @@ const lolminerAPI: minerapi = {
       location: "/",
       value: "Session.Uptime",
     },
-    hashrate: {
+    /*hashrate: {
         location: "/",
         value: "Algorithms.0.Worker_Performance.0" 
-    },
-    hashrate_unit: {
+    },*/
+    /*hashrate_unit: {
         location: "/",
         value: "Algorithms.0.Performance_Unit"
-    }
-    /* workers: {
+    }*/
+    workers: {
         location: "/",
         value: "Workers"
-    } */
+    },
+    algorithms: {
+        location: "/",
+        value: "Algorithms",
+        locations: {
+            algorithm: "Algorithm",
+            pool: "Pool",
+            user: "User",
+            hashrate: "Worker_Performance",
+            hashrate_unit: "Performance_Unit"
+        }
+    }
   };
 const lolminer = new Miner<minerapi>("lolminer", "", lolminerAPI, "lolMiner API");
   
