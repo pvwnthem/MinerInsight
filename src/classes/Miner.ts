@@ -1,5 +1,5 @@
 import { MinerAlgorithm, MinerWorker } from "@/types/data.types";
-import { miner, minerapi } from "@/types/miner.types"
+import { miner, minerapi, minerapiroute } from "@/types/miner.types"
 
 
 export class Miner<T extends minerapi> {
@@ -7,17 +7,19 @@ export class Miner<T extends minerapi> {
     baseUrl: string;
     serverHeader: string | undefined;
     x_powered_by_header: string | undefined;
+    identifier: minerapiroute | undefined;
     algorithms: MinerAlgorithm[]
     workers: MinerWorker[]
     api: T;
   
-    constructor(name: string, baseUrl: string, api: T, serverHeader?: string, x_powered_by_header?: string) {
+    constructor(name: string, baseUrl: string, api: T, serverHeader?: string, x_powered_by_header?: string, identifier?: minerapiroute) {
       this.name = name;
       this.baseUrl = baseUrl;
       this.serverHeader = serverHeader;
       this.x_powered_by_header = x_powered_by_header;
       this.algorithms = []
       this.workers = []
+      this.identifier = identifier
       this.api = api;
     }
 

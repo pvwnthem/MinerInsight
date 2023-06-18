@@ -1,5 +1,6 @@
 import axios from "axios";
 import { miners } from "../constants/miners";
+import { getField } from "./data.service";
 
 export async function identifyApi(url: string) {
     try {
@@ -8,7 +9,7 @@ export async function identifyApi(url: string) {
  
   
         for (const miner of miners) {
-            const { serverHeader, x_powered_by_header } = miner;
+            const { serverHeader, x_powered_by_header, identifier } = miner;
 
             if (
             serverHeader &&
@@ -32,6 +33,16 @@ export async function identifyApi(url: string) {
                 miner.setBaseUrl(url);
             }
             return miner;
+            }
+
+            if (identifier) {
+                const data = await getField(identifier, url)
+                if (data) {
+                    if (url !== miner.baseUrl) {
+                        miner.setBaseUrl(url);
+                    }
+                    return miner;
+                }
             }
         }
 

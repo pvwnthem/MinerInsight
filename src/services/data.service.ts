@@ -35,7 +35,6 @@ export async function getField ( location : minerapiroute, baseUrl : string ): P
 {
     const response: AxiosResponse = await axios.get(baseUrl + location.location)
     const data: any = parseLocation(location.value, response.data)
-
     return data;
 }
 

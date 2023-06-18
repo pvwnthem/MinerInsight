@@ -12,14 +12,6 @@ const lolminerAPI: minerapi = {
       location: "/",
       value: "Session.Uptime",
     },
-    /*hashrate: {
-        location: "/",
-        value: "Algorithms.0.Worker_Performance.0" 
-    },*/
-    /*hashrate_unit: {
-        location: "/",
-        value: "Algorithms.0.Performance_Unit"
-    }*/
     workers: {
         location: "/",
         value: "Workers"
@@ -37,10 +29,9 @@ const lolminerAPI: minerapi = {
     }
   };
 const lolminer = new Miner<minerapi>("lolminer", "", lolminerAPI, "lolMiner API");
-  
 
 
 
 export const miners = [
-    lolminer
+    lolminer,
 ]
