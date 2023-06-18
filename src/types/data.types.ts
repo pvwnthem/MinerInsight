@@ -16,19 +16,21 @@ export interface standardizedData {
     hashrate_unit?: number;
   }
 
+
   export interface MinerAlgorithmLocations {
-    [key: string]: string;
-    algorithm: string;
-    pool: string;
-    user: string;
-    hashrate: string;
-    hashrate_unit: string;
+    algorithm?: string;
+    pool?: string;
+    user?: string;
+    hashrate?: string;
+    hashrate_unit?: string;
   }
-  export interface WorkerAlgorithmLocations {
+  export interface MinerWorkerLocations {
     [key: string]: string;
     id: string
     name: string
   }
+
+ 
   
   export interface MinerWorker {
     id?: number

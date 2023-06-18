@@ -80,8 +80,8 @@ export function standardizeAlgorithm( data: standardizedData, miner: miner ) {
             for (const key in miner.api.algorithms.locations) {
               if (miner.api.algorithms.locations.hasOwnProperty(key)) {
                 const prop = key as keyof MinerAlgorithm;
-                const location = miner.api.algorithms.locations[key];
-                algorithm[prop] = parseLocation(location, algorithmObj);
+                const location = miner.api.algorithms.locations[key as keyof MinerAlgorithm];
+                algorithm[prop] = parseLocation(location as string, algorithmObj);
               }
             }
     
