@@ -31,7 +31,15 @@ export async function identifyApi(url: string) {
         }
         return miner;
       }
+      if (identifier && await getField(identifier, url) != undefined) {
+        if (url !== miner.baseUrl) {
+          miner.setBaseUrl(url);
+        }
+        return miner;
+      }
     }
+
+    
 
     return 'Unknown mining software';
   } catch (error) {

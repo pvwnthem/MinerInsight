@@ -3,6 +3,7 @@ import { MinerAlgorithm, MinerAlgorithmLocations, MinerWorker, MinerWorkerLocati
 export interface minerapi {
   [key: string]: minerapiroute | algorithmapiroute | workerapiroute;
   software: minerapiroute;
+  version: minerapiroute;
   start_time: minerapiroute;
   algorithms: algorithmapiroute;
   workers: workerapiroute;

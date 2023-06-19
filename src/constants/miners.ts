@@ -8,6 +8,10 @@ const lolminerAPI: minerapi = {
         location: "/",
         value: "Software"
     },
+    version: {
+        location: "/",
+        value: ""
+    },
     start_time: {
       location: "/",
       value: "Session.Startup",
@@ -36,9 +40,13 @@ const lolminer = new Miner<minerapi>("lolminer", "", lolminerAPI, {algorithms: {
 
 
 const nbminerAPI: minerapi = {
-    software: {
+    version: {
         location: "/api/v1/status",
         value: "version"
+    },
+    software: {
+        location: "/api/v1/status",
+        value: ""
     },
     start_time: {
       location: "/api/v1/status",

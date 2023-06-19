@@ -57,7 +57,6 @@ export async function standardizePartials(standardizedData: standardizedData, mi
 export async function getField(location: minerapiroute, baseUrl: string): Promise<any> {
   const response = await fetch(baseUrl + location.location);
   const data: any = parseLocation(location.value, await response.json());
-  console.log(data)
   return data;
 }
 
@@ -206,8 +205,7 @@ export async function getAllData(miner: miner): Promise<any> {
     algorithms: standardizedAlgorithms,
   };
 
-  const partialsData: partials = await standardizePartials(rtdata, miner);
-  rtdata.partials = partialsData;
+  await standardizePartials(rtdata, miner);
 
   // Return standardized data
   Logger.Info("All data standardized returning to client.")
