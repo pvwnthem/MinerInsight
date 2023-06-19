@@ -46,7 +46,8 @@ const nbminerAPI: minerapi = {
     },
     software: {
         location: "/api/v1/status",
-        value: ""
+        value: "",
+        override: "name"
     },
     start_time: {
       location: "/api/v1/status",

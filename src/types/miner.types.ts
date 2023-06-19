@@ -12,7 +12,9 @@ export interface minerapi {
 export interface minerapiroute {
   location: string;
   value: string;
+  override?: string
 }
+// override should be a valid field of the Miner class
 
 export interface partials {
   algorithms: algorithmpartials;

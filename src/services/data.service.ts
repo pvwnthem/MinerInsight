@@ -80,6 +80,10 @@ export function standardizeData(data: any, miner: miner): standardizedData {
     if (miner.api.hasOwnProperty(prop)) {
       const propName = prop as keyof standardizedData;
       rtdata[propName] = data[miner.api[prop].value];
+
+      if(miner.api[prop].override) {
+        rtdata[propName] = miner[miner.api[prop].override as keyof miner]
+      }
     }
   }
 
@@ -127,10 +131,11 @@ export function standardizeWorkers(data: standardizedData, miner: miner) {
 
         for (const key in miner.api.workers.locations) {
           if (miner.api.workers.locations.hasOwnProperty(key)) {
-            const prop = key as keyof MinerWorker;
+            const prop = key as keyof MinerWorker
             const location = miner.api.workers.locations[key];
             worker[prop] = parseLocation(location, workerObj);
           }
+          
         }
 
         workerFields.push(worker);
