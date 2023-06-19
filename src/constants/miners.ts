@@ -1,5 +1,5 @@
 import { Miner } from "../classes/Miner";
-import { miner, minerapi } from "../types/miner.types"
+import { miner, minerapi, partials } from "../types/miner.types"
 
 // for an empty field you must set the location but not the value
 
@@ -32,7 +32,7 @@ const lolminerAPI: minerapi = {
         }
     }
   };
-const lolminer = new Miner<minerapi>("lolminer", "", lolminerAPI, "lolMiner API");
+const lolminer = new Miner<minerapi>("lolminer", "", lolminerAPI, {algorithms: {}, workers: {}}, "lolMiner API");
 
 
 const nbminerAPI: minerapi = {
@@ -51,19 +51,8 @@ const nbminerAPI: minerapi = {
             id: "id",
             name: "info"
         }
-    },
-    algorithm: {
-        location: "/api/v1/status",
-        value: "stratum.algorithm"
-    },
-    pool: {
-        location: "/api/v1/status",
-        value: "stratum.url"
-    },
-    user: {
-        location: "/api/v1/status",
-        value: "user"
-    },
+    },    
+   
     algorithms: {
         location: "/api/v1/status",
         value: "miner.devices",
@@ -77,7 +66,31 @@ const nbminerAPI: minerapi = {
     },
 }
 
-const nbminer = new Miner<minerapi>("nbminer", "/api/v1/stats", nbminerAPI, undefined, undefined, { location: "/api/v1/status", value: "stratum.dual_mine" });
+const nbminerPartials: partials = {
+        algorithms: {
+            algorithm: {
+                location: "/api/v1/status",
+                value: "stratum.algorithm",
+                index: 0
+            },
+            user: {
+                location: "/api/v1/status",
+                value: "stratum.user",
+                index: 0
+            },
+            pool: {
+                location: "/api/v1/status",
+                value: "stratum.url",
+                index: 0
+            },
+
+            
+        },
+        workers: {}
+}
+
+const nbminer = new Miner<minerapi>("nbminer", "/api/v1/status", nbminerAPI, nbminerPartials, undefined, undefined,
+ { location: "/api/v1/status", value: "stratum.dual_mine" });
 
 
 export const miners = [
