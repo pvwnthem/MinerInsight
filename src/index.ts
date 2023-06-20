@@ -7,6 +7,9 @@ import { Logger } from "./logging/Logger";
 import { miner } from "./types/miner.types";
 import path from "path";
 import miners from "./routes/miners";
+import axios from "axios";
+import { identifyApi } from "./services/identification.service";
+import { getAllData } from "./services/data.service";
 
 const port = 8888;
 
